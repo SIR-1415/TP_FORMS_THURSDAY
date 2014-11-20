@@ -1,0 +1,95 @@
+<html>
+	<head>
+		<script>
+			function validate() {
+				formIsValid = true;
+				errorMessages = new Array();
+				
+				// validate the name
+				if(document.getElementById("ifname").value.length == 0) {
+					formIsValid = false;
+					errorMessages.push("first name must not be empty");
+				}
+				
+				// at least two elements must be checked
+				languages = document.forms["f1"].elements["vlang[]"];
+				checklang = 0;
+				i=0;
+				while (languages[i]) {
+					if (languages[i].checked) checklang++;
+					i++;
+				}
+				if (checklang < 2) {
+					formIsValid = false;
+					errorMessages.push("at least 2 languages");
+				}
+			
+				
+				// validate other fileds
+				//...
+				
+				// check if for valid
+				
+				if (formIsValid) {
+					return true;
+				} else {
+					alert(errorMessages)
+					return false;
+				}
+			}
+			
+		</script>
+	</head>
+	<body>
+		<form action="dump.php" method="GET" id="f1" onsubmit="return validate();">
+			<fieldset id="fs1">
+				<legend>basic biographic data</legend>
+				<label for="ititle">Title</label>
+				<select id="ititle" name="vtitle[]">
+					<optgroup ></optgroup>
+					<optgroup label="Titles for the people">
+					<option value="0">Mr</option>
+					<option value="1">Mrs</option>
+					<option value="2">Child</option>
+					</optgroup>
+					<optgroup label="Titles for the Royalty">
+					<option value="10">Queen</option>
+					<option value="11">King</option>
+					<option value="12">Prince(ss)</option>
+					</optgroup>
+				</select>
+				<p>
+				<label for="ifname">First Name</label>
+				<input type="text" name="vfname" id="ifname">
+				</p>
+			</fieldset>
+			<fieldset id="fs2">
+				<legend>gender</legend>
+				<label for="igenderM">Male: </label>
+				<input type="radio" id="igenderM" name="vgender" value="M" checked="checked"/>
+				
+				<label for="igenderF">Female: </label>
+				<input type="radio" id="igenderF" name="vgender" value="F"/>
+				
+			</fieldset>
+			<fieldset id="fs3">
+				<legend>Languages</legend>
+				<label for="ilangFR">French: </label>
+				<input type="checkbox" id="ilangFR" name="vlang[]" value="FR">
+				<label for="ilangPL">Polish: </label>
+				<input type="checkbox" id="ilangPL" name="vlang[]" value="PL">
+				<label for="ilangES">Spanish: </label>
+				<input type="checkbox" id="ilangES" name="vlang[]" value="ES">
+			</fieldset>
+		
+			
+			<fieldset id="fsx">
+				<legend>submission</legend>
+				<input id="isubmit" type="submit" value="Yes! I want to submit"/>
+				<input id="ireset" type="reset" value="Please clear the form"/>
+			</fieldset>
+			
+			
+		</form>
+	</body>
+</html>
